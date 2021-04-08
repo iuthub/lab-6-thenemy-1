@@ -11,11 +11,16 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 	$pattern=$_POST["pattern"];
 	$text=$_POST["text"];
 	$replaceText=$_POST["replaceText"];
+	echo  $replaceText;
+	$check_preg_match = !empty($pattern)  && !empty($text);
+	$check_preg_replace = $check_preg_match;
+    echo  $text;
+    if($check_preg_replace) {
+        $replacedText = preg_replace($pattern,' ', $text);
+    }
 
-	$replacedText=preg_replace($pattern, $replaceText, $text);
-
-	if(preg_match($pattern, $text)) {
-						$match="Match!";
+	            if($check_preg_match ) {
+						$match= preg_match($pattern, $text);
 					} else {
 						$match="Does not match!";
 					}
@@ -51,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 			<dt>&nbsp;</dt>
 			<dd><input type="submit" value="Check"></dd>
 		</dl>
-
 	</form>
 </body>
 </html>
